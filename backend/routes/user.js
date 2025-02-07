@@ -3,6 +3,7 @@ const User = require('../models/user');
 const bcrypt = require('bcryptjs');
 const { response } = require('express');
 const jwt = require("jsonwebtoken");
+const authMiddleware = require('../middleware/authMiddleware');
 // signup -route
 
 router.post('/signup', async (req, res) => {
@@ -101,7 +102,7 @@ router.post('/sign-in', async (req, res) => {
         httpOnly:true,
     });
     res.status(200).json({message: "Logged out successfully"});
- })
+ });
 module.exports = router;
 
 // check cookie present or not
@@ -112,4 +113,21 @@ router.post("/chec-cookie",async(req , res)=>{
         return res.status(200).json({message: "True"});
     }
     response.status(200).json({message: "False"});
-})
+});
+
+// ROUTE TO FETCH USER DETAIL
+
+router.post("/user-details", authMiddleware, async(req , res)=>{
+  try{
+    const {email} = req.user;
+    const existingUser = await User.findOne({email: email}).select(
+        "-password"
+    );
+    return res.status(200).json({
+        user: existingUser, 
+  });
+  }catch(error){
+    console.log(error);
+    res.status(500).json({error: "Error"});
+  }
+});
