@@ -1,9 +1,8 @@
-import js from '@eslint/js'
-import globals from 'globals'
-import react from 'eslint-plugin-react'
-import reactHooks from 'eslint-plugin-react-hooks'
-import reactRefresh from 'eslint-plugin-react-refresh'
-import { ReactThreeFiber } from '@react-three/fiber'
+import js from '@eslint/js';
+import globals from 'globals';
+import react from 'eslint-plugin-react';
+import reactHooks from 'eslint-plugin-react-hooks';
+import reactRefresh from 'eslint-plugin-react-refresh';
 
 export default [
   { ignores: ['dist'] },
@@ -35,6 +34,9 @@ export default [
         'warn',
         { allowConstantExport: true },
       ],
+      "react/no-unknown-property": ["error", {
+        ignore: ["intensity", "position", "castShadow", "preset", "metalness", "roughness", "envMapIntensity", "color", "reflectivity", "clearcoat", "clearcoatRoughness", "angle", "penumbra"] // Add other Three.js properties as needed.  Added angle and penumbra for spotLight if you use it later.
+      }]
     },
   },
-]
+];

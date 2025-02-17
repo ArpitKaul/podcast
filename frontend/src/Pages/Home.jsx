@@ -51,33 +51,32 @@ const Home = () => {
           </div>
         </div>
       </div>
-
       <div className="w-full h-[50rem] flex items-center justify-center">
-        <Canvas className="w-full h-full " shadows camera={{ position: [0, 0, 5] }}>
-          <Suspense fallback={<CanvasLoader />}>
-            <Headphone
-              ref={modelRef}
-              position={[0, -0.7, 0]}
-              rotation={[rotation[0], rotation[1] + (11 * Math.PI) / 180, rotation[2]]}
-              scale={[1.2, 1.2, 1.2]}
-              onPointerDown={onPointerDown}
-            >
-              <meshStandardMaterial
-                metalness={0.8}
-                roughness={0.2}
-                color="#ffd700"
-                envMapIntensity={1}
-              />
-            </Headphone>
+      <Canvas className="w-full h-full " shadows camera={{ position: [0, 0, 5] }}>
+        <Suspense fallback={<CanvasLoader />}>
+          <Headphone
+            ref={modelRef}
+            position={[0, -0.7, 0]}
+            rotation={[rotation[0], rotation[1] + (11 * Math.PI) / 180, rotation[2]]}
+            scale={[1, 1, 1]}
+            onPointerDown={onPointerDown}
+          >
+            <meshStandardMaterial
+              metalness={0.8}
+              roughness={0.2}
+              color="#ffd700"
+              envMapIntensity={1}
+            />
+          </Headphone>
 
-            <ambientLight intensity={0.5} />
-            <directionalLight position={[1, 1, 1]} intensity={1} castShadow />
-            <directionalLight position={[-1, -1, -1]} intensity={0.5} color="#ffccaa" />
-            <Environment preset="apartment" />
-            <OrbitControls />
-          </Suspense>
-        </Canvas>
-      </div>
+          <ambientLight intensity={0.5} />
+          <directionalLight position={[1, 1, 1]} intensity={1} castShadow />
+          <directionalLight position={[-1, -1, -1]} intensity={0.5} color="#ffccaa" />
+          <Environment preset="apartment" />
+          <OrbitControls />
+        </Suspense>
+      </Canvas>
+    </div>
 
       <div className="mt-12 flex flex-col lg:flex-row w-full md:items-center md:justify-between text-center md:text-left">
         <div className="max-w-lg">

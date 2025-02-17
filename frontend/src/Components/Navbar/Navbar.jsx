@@ -29,7 +29,7 @@ const Navbar = () => {
       <div className="flex items-center justify-between">
         <div className="logo brand-name w-2/6 flex gap-2">
         <img className='w-10 h-10' src={musical} alt="" />
-          <Link to="/" className="text-2xl font-bold text-yellow-300  mt-1">Podcaster</Link>
+          <Link to="/login" className="text-2xl font-bold text-yellow-300  mt-1">Podcaster</Link>
         </div>
         <div className="w-2/6 lg:flex items-center justify-center text-xl hidden text-white">
           {navLinks.map((item, i) => (
@@ -39,8 +39,8 @@ const Navbar = () => {
           ))}
         </div>
         <div className="w-2/6 hidden lg:flex items-center justify-end">
-        <Link className='px-6 py-2 border border-white rounded-full text-white'>Login</Link>
-        <Link className='ms-4 py-2 border border-black rounded-full text-white bg-black w-20 pl-4'>Signup
+        <Link to="/login"   className='px-6 py-2 border border-white rounded-full text-white'>Login</Link>
+        <Link to="/Signup" className='ms-4 py-2 border border-black rounded-full text-white bg-black w-20 pl-4'>Signup
         </Link>
         </div>
         <div className='w-4/6 lg:hidden flex items-center justify-end z-[1000]'>
@@ -59,12 +59,12 @@ const Navbar = () => {
           ))}
           <Link 
           to="/login"
-          className='mb-12 text-3xl hover:font-semibold trasition-all duration-300'>
+          className='mb-12 text-3xl hover:font-semibold transition-all duration-300'>
           Login
           </Link>
           <Link 
-          to="/signup"
-          className='mb-12 text-3xl hover:font-semibold trasition-all duration-300'>
+          to="/Signup"
+          className='mb-12 text-3xl hover:font-semibold transition-all duration-300'>
           SignUp
           </Link>
         </div>
