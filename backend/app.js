@@ -4,11 +4,12 @@ const cookieParser = require('cookie-parser');
 const userApi = require("./routes/user.js")
 const CatApi = require("./routes/categories");
 const PodcastApi = require("./routes/podcast");
+const cors = require("cors");
 
 
 require("dotenv").config();
 require("./conn/conn");
-
+app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 app.use("/api/v1",userApi);

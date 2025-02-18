@@ -48,7 +48,8 @@ router.post('/signup', async (req, res) => {
 
 // login - route
 
-router.post('/sign-in', async (req, res) => {
+router.post('/signin', async (req, res) => {
+    // console.log('signin');
     try{
         const {email, password} = req.body;
         if(!email ||!password)
@@ -80,7 +81,7 @@ router.post('/sign-in', async (req, res) => {
             {expiresIn: '30d'}
         );
 
-        response.cookie("podcasterUserToken", token,{
+        res.cookie("podcasterUserToken", token,{
             httpOnly: true,
             maxAge:30*24*60*60*100,
             secure: process.env.NODE_ENV === 'production',
@@ -92,6 +93,7 @@ router.post('/sign-in', async (req, res) => {
             message:"Signed in successfully"
         });
     }catch (error){
+        console.log(error);
         res.status(500).json({error});
     }
 });
