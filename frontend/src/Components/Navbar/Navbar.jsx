@@ -25,9 +25,9 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="md:px-8 lg:px-12 px-4 py-2 mt-3 relative">
-      <div className="flex items-center justify-between">
-        <div className="logo brand-name w-2/6 flex gap-2">
+    <nav className="md:px-8 lg:px-12 px-4 py-2 mt-3 relative   ">
+      <div className="flex items-center justify-between ">
+        <div className="logo brand-name w-2/6 flex gap-2 ">
         <img className='w-10 h-10' src={musical} alt="" />
           <Link to="/login" className="text-2xl font-bold text-yellow-300  mt-1">Podcaster</Link>
         </div>
