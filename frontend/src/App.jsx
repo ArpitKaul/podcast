@@ -8,6 +8,7 @@ import Signup from "./Pages/Signup";
 import Login from "./Pages/Login";
 import Categories from "./Pages/Categories";
 import FollowCursor from './hooks/FollowCursor';
+import Profile from './Pages/Profile';
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
           <Route path="/" element={<Mainlayout />}>
             <Route index element={<Home />} />
             <Route path="/categories" element={<Categories />} />
+            <Route path="/profile" element={<Profile />} />
           </Route>
 
           <Route path="/" element={<Authlayout />}>

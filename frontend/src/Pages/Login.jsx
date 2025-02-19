@@ -20,7 +20,8 @@ const Login = () => {
   };
   const handleSubmit = async ()=>{
     try{
-     const res =  await axios.post("http://localhost:5000/api/v1/signin", Values);
+     const res =  await axios.post("http://localhost:5000/api/v1/signin", Values,{withCredentials:true} 
+     );
      console.log(res.data);
      navigate("/profile");
     }catch(error){

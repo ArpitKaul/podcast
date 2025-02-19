@@ -3,7 +3,11 @@ import musical from '../../assets/musical.png';
 import {IoReorderThreeOutline} from "react-icons/io5";
 import {RxCross2} from "react-icons/rx";
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
+
 const Navbar = () => {
+  // const isLoggedIn = useSelector((state)=>state.auth.isLoggedIn);
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
     const [MobileNav, setMobileNav] = useState(false);
   const navLinks = [
     {
@@ -17,10 +21,6 @@ const Navbar = () => {
     {
       name: 'All Podcasts',
       path: "/all-podcasts"
-    },
-    {
-        name: 'Profile',
-        path: "/profile"
     }
   ];
 
@@ -39,9 +39,16 @@ const Navbar = () => {
           ))}
         </div>
         <div className="w-2/6 hidden lg:flex items-center justify-end">
-        <Link to="/login"   className='px-6 py-2 border border-white rounded-full text-white'>Login</Link>
-        <Link to="/Signup" className='ms-4 py-2 border border-black rounded-full text-white bg-black w-20 pl-4'>Signup
-        </Link>
+        {!isLoggedIn &&( <>
+          <Link to="/login"   className='px-6 py-2 border border-white rounded-full text-white'>Login</Link>
+
+          <Link to="/Signup" className='ms-4 py-2 border border-black rounded-full text-white bg-black w-20 pl-4'>Signup
+          </Link>
+          </>
+        )}
+        {isLoggedIn &&  <Link to="/profile" className='ms-4 py-2 border border-black rounded-full text-white bg-black w-20 pl-4'>
+        
+        </Link>}
         </div>
         <div className='w-4/6 lg:hidden flex items-center justify-end z-[1000]'>
         <button className={`text-5xl ${MobileNav ? "rotate-360":"rotate-180"} transition-all duration-300`} onClick={()    =>setMobileNav(!MobileNav)}>
