@@ -3,11 +3,15 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {ToastContainer , toast} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 import axios from "axios";
+import { useDispatch, useSelector } from 'react-redux';
+import { authActions } from '../store/auth';
+import ErrorPage from './ErrorPage';
 
 
 const Login = () => {
+  const isLoggedIn= useSelector((state)=> state.auth.isLoggedIn);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const  [Values , setValues] = useState({
     email:"",
@@ -20,8 +24,12 @@ const Login = () => {
   };
   const handleSubmit = async ()=>{
     try{
-     const res =  await axios.post("http://localhost:5000/api/v1/signin", Values,{withCredentials:true} 
-     );
+     const res =  await axios.post("http://localhost:5000/api/v1/signin", Values,
+     {
+      withCredentials:true
+     } 
+    );
+     dispatch(authActions.login());   
      console.log(res.data);
      navigate("/profile");
     }catch(error){
@@ -29,7 +37,7 @@ const Login = () => {
     }
   };
   return (
-    <div className="h-screen flex items-center justify-center bg-gradient-to-b from-[#00275b] via-[#0b1b29] to-[#0d0d0d] px-4">
+    <>{isLoggedIn ? <ErrorPage/> : <div className="h-screen flex items-center justify-center bg-gradient-to-b from-[#00275b] via-[#0b1b29] to-[#0d0d0d] px-4">
       
       {/* Login Box */}
       <div className="w-full max-w-md p-8 bg-white/10 border border-white/20 rounded-xl shadow-lg backdrop-blur-lg text-white sm:w-96 md:w-[400px]">
@@ -90,7 +98,8 @@ const Login = () => {
         </div>
 
       </div>
-    </div>
+    </div>}</>
+    
   );
 };
 

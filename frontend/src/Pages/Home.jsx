@@ -45,8 +45,8 @@ const Home = () => {
             </span>
           </h1>
         </div>
-        <div className="lg:block hidden w-1/6 md:w-auto"> {/* Scroll down box size */}
-          <div className="py-2 px-4 border border-black font-semibold rounded-full text-center bg-white -rotate-90 text-sm md:text-base md:mt-6"> {/* Scroll down box styling */}
+        <div className="lg:block hidden w-1/6 md:w-auto"> 
+          <div className="py-2 px-4 border border-black font-semibold rounded-full text-center bg-white -rotate-90 text-sm md:text-base md:mt-6"> 
             Scroll Down
           </div>
         </div>

@@ -109,8 +109,8 @@ module.exports = router;
 
 // check cookie present or not
 
-router.post("/chec-cookie",async(req , res)=>{
-    const  token = req.cookie.podcasterUserToken;
+router.post("/check-cookie",async(req , res)=>{
+    const  token = req.cookies.podcasterUserToken;
     if(!token){
         return res.status(200).json({message: "True"});
     }
@@ -119,7 +119,7 @@ router.post("/chec-cookie",async(req , res)=>{
 
 // ROUTE TO FETCH USER DETAIL
 
-router.post("/user-details", authMiddleware, async(req , res)=>{
+router.get("/user-details/", authMiddleware, async(req , res)=>{
   try{
     const {email} = req.user;
     const existingUser = await User.findOne({email: email}).select(

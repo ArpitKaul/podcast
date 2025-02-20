@@ -24,6 +24,8 @@ const Navbar = () => {
     }
   ];
 
+  
+
   return (
     <nav className="md:px-8 lg:px-12 px-4 py-2 mt-3 relative   ">
       <div className="flex items-center justify-between ">
@@ -47,7 +49,7 @@ const Navbar = () => {
           </>
         )}
         {isLoggedIn &&  <Link to="/profile" className='ms-4 py-2 border border-black rounded-full text-white bg-black w-20 pl-4'>
-        
+        Profile
         </Link>}
         </div>
         <div className='w-4/6 lg:hidden flex items-center justify-end z-[1000]'>
