@@ -23,7 +23,7 @@ const Header = () => {
   }, []);
 
      const LogoutHandler = async () =>{
-        const res = await axios.post("http://localhost:5000/api/v1/logout" , {withCredentials: true});
+      const res = await axios.post("http://localhost:5000/api/v1/logout" , {withCredentials: true});
         // console.log(res.data); 
         dispatch(authActions.logout());
         navigate("/");
@@ -49,7 +49,6 @@ const Header = () => {
         </div>
       )}
     </div>
-      
     </>
   );
 };

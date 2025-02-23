@@ -10,6 +10,8 @@ import Profile from './Pages/Profile';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { authActions } from './store/auth';
+import Yourpodcast from './Pages/YourPodcast';
+import Addpodcast from './Pages/Addpodcast';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -35,6 +37,8 @@ const App = () => {
           <Route index element={<Home />} />
           <Route path="categories" element={<Categories />} />
           <Route path="profile" element={<Profile />} />
+          <Route path="/add-podcasts" element={<Addpodcast />} />
+          <Route path="/your-podcasts" element={<Yourpodcast/>}/>
         </Route>
 
         <Route element={<Authlayout />}>

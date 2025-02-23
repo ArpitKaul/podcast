@@ -19,8 +19,12 @@ const Navbar = () => {
       path: "/categories"
     },
     {
-      name: 'All Podcasts',
-      path: "/all-podcasts"
+      name: 'Add Podcasts',
+      path: "/add-podcasts"
+    },
+    {
+      name: 'Podcasts',
+      path: "/your-podcasts"
     }
   ];
 
