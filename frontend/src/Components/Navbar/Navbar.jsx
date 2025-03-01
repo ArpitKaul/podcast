@@ -3,12 +3,20 @@ import musical from '../../assets/musical.png';
 import {IoReorderThreeOutline} from "react-icons/io5";
 import {RxCross2} from "react-icons/rx";
 import { useState } from 'react';
+import { useDispatch } from "react-redux";
 import { useSelector } from 'react-redux';
+import { authActions } from "../../store/auth";
 
 const Navbar = () => {
-  // const isLoggedIn = useSelector((state)=>state.auth.isLoggedIn);
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
     const [MobileNav, setMobileNav] = useState(false);
+
+    const dispatch = useDispatch();
+
+    const handleLogout = () => {
+      dispatch(authActions.logout());
+      // alert("Logout Successful");
+    };
   const navLinks = [
     {
       name: 'Home',
@@ -52,9 +60,15 @@ const Navbar = () => {
           </Link>
           </>
         )}
-        {isLoggedIn &&  <Link to="/profile" className='ms-4 py-2 border border-black rounded-full text-white bg-black w-20 pl-4'>
+        {isLoggedIn &&  <>
+          <Link to="/profile" className='ms-4 py-2 border border-black rounded-full text-white bg-black w-20 pl-4'>
         Profile
-        </Link>}
+        </Link>
+        <Link onClick={handleLogout} className='ms-4 py-2 border border-black rounded-full text-white bg-black w-20 pl-4'>
+        Logout
+        </Link>
+        </>
+        }
         </div>
         <div className='w-4/6 lg:hidden flex items-center justify-end z-[1000]'>
         <button className={`text-5xl ${MobileNav ? "rotate-360":"rotate-180"} transition-all duration-300`} onClick={()    =>setMobileNav(!MobileNav)}>

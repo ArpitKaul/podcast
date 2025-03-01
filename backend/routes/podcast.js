@@ -28,7 +28,7 @@ router.post("/add-podcast", upload, authMiddleware, async (req, res) => {
 
     const newPodcast = new Podcast({
         title,
-        description, 
+        Description, 
         category: catid,
         frontImage,
         audioFile,

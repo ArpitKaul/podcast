@@ -37,7 +37,7 @@ const Login = () => {
     }
   };
   return (
-    <>{isLoggedIn ? <ErrorPage/> : <div className="h-screen flex items-center justify-center bg-gradient-to-b from-[#00275b] via-[#0b1b29] to-[#0d0d0d] px-4">
+    <>{isLoggedIn ? <h1 className='text-white '>You are signed in as a user.</h1> : <div className="h-screen flex items-center justify-center bg-gradient-to-b from-[#00275b] via-[#0b1b29] to-[#0d0d0d] px-4">
       
       {/* Login Box */}
       <div className="w-full max-w-md p-8 bg-white/10 border border-white/20 rounded-xl shadow-lg backdrop-blur-lg text-white sm:w-96 md:w-[400px]">
