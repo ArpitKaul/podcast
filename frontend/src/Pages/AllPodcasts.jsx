@@ -1,57 +1,65 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { playerActions } from "../store/player";
 
-const AllPodcasts = () => {
-  const [podcasts, setPodcasts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+const PodcastCard = ({ items }) => {
+  const dispatch = useDispatch();
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
-  useEffect(() => {
-    const fetchPodcasts = async () => {
-      try {
-        const response = await axios.get('http://localhost:5000/api/v1/get-podcasts');
-        setPodcasts(response.data.data);
-        setLoading(false);
-      } catch (err) {
-        setError(err);
-        setLoading(false);
-      }
-    };
-
-    fetchPodcasts();
-  }, []);
-
-  if (loading) {
-    return <div>Loading...</div>;
+  if (!items) {
+    return null; // Stop rendering if items is undefined
   }
 
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  }
+  const handlePlay = (e) => {
+    if (isLoggedIn) {
+      e.preventDefault();
+      dispatch(playerActions.setDiv());
+      dispatch(
+        playerActions.changeImage(`http://localhost:5000/${items?.frontImage}`)
+      );
+      dispatch(
+        playerActions.changeSong(`http://localhost:5000/${items?.audioFile}`)
+      );
+    }
+  };
 
   return (
-    <div className="my-4 px-4 lg:px-12 bg-gradient-to-br from-gray-800 to-gray-900 text-white min-h-screen">
-      <h1 className="text-2xl font-semibold mb-4">All Podcasts</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {podcasts.map((podcast) => (
-          <div key={podcast._id} className="border border-gray-700 rounded-lg p-4">
-            <img
-              src={`http://localhost:5000/${podcast.frontImage}`}
-              alt={podcast.title}
-              className="w-full h-48 object-cover rounded-md mb-2"
-            />
-            <h2 className="text-lg font-semibold">{podcast.title}</h2>
-            <p className="text-sm text-gray-400">{podcast.Description}</p>
-            <p className="text-sm text-gray-400">Category: {podcast.category.categoryName}</p>
-            <audio controls className="w-full mt-2">
-              <source src={`http://localhost:5000/${podcast.audioFile}`} type="audio/mpeg" />
-              Your browser does not support the audio element.
-            </audio>
+    <div>
+      <Link
+        to={`/description/${items?._id}`}
+        className="border p-4 rounded-2xl flex flex-col shadow-xl hover:shadow-2xl transition-all duration-300"
+      >
+        <div>
+          <img
+            src={`http://localhost:5000/${items?.frontImage}`}
+            alt=""
+            className="rounded size-[42vh] object-cover"
+          />
+        </div>
+        <div>
+          <div className="mt-2 text-xl font-bold">
+            {items?.title?.slice(0, 20)}
           </div>
-        ))}
-      </div>
+          <div className="mt-2 leading-5 text-slate-500">
+            {items?.description?.slice(0, 50)}
+          </div>
+          <div className="mt-2 bg-orange-100 text-orange-700 border border-orange-700 rounded-full px-4 py-2 text-center">
+            {items?.category?.categoryName}
+          </div>
+          <div className="mt-2">
+            <Link
+              to={isLoggedIn ? "#" : "/signup"}
+              className="bg-green-900 text-white px-4 py-2 rounded mt-2 flex items-center hover:bg-green-700"
+              onClick={handlePlay}
+            >
+              Play Now
+            </Link>
+          </div>
+        </div>
+      </Link>
     </div>
   );
 };
 
-export default AllPodcasts;
+export default PodcastCard;

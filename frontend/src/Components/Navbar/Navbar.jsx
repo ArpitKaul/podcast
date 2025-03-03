@@ -31,10 +31,6 @@ const Navbar = () => {
       path: "/add-podcasts"
     },
     {
-      name: 'Podcasts',
-      path: "/your-podcasts"
-    },
-    {
       name: 'all-Podcasts',
       path: "/all-podcasts"
     }

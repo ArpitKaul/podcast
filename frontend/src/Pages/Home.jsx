@@ -1,4 +1,4 @@
-import { Canvas } from "@react-three/fiber";
+import { Canvas, useFrame } from "@react-three/fiber";
 import { Suspense, useState, useRef } from "react";
 import headphone from "/src/assets/headphones.png";
 import Headphone from "../Components/Navbar/Headphone";
@@ -28,10 +28,21 @@ const Home = () => {
     window.addEventListener("pointerup", onPointerUp);
   };
 
+  const Animation = () => {
+    const time = useRef(0);
+    useFrame(() => {
+      time.current += 0.01;
+      if (modelRef.current && modelRef.current.position) {
+        modelRef.current.position.y = -0.9 + Math.sin(time.current) * 0.1;
+      }
+    });
+    return null;
+  };
+
   return (
     <div className="md:px-12 px-4 h-screen flex flex-col items-center md:pt- pt-10 md:mt-2">
       <div className="w-full flex flex-col md:flex-row items-center justify-between gap-4">
-        <div className="lg:w-5/6 w-full text-center md:text-left md:ml-12"> {/* Heading right shift */}
+        <div className="lg:w-5/6 w-full text-center md:text-left md:ml-12">
           <h1 className="lg:text-7xl md:text-6xl text-3xl font-bold leading-tight text-gray-200 font-serif md:ml-16">
             Create & listen to the <br />
             <span className="inline-flex items-center">
@@ -45,8 +56,8 @@ const Home = () => {
             </span>
           </h1>
         </div>
-        <div className="lg:block hidden w-1/6 md:w-auto"> 
-          <div className="py-2 px-4 border border-black font-semibold rounded-full text-center bg-white -rotate-90 text-sm md:text-base md:mt-6"> 
+        <div className="lg:block hidden w-1/6 md:w-auto">
+          <div className="py-2 px-4 border border-black font-semibold rounded-full text-center bg-white -rotate-90 text-sm md:text-base md:mt-6">
             Scroll Down
           </div>
         </div>
@@ -69,7 +80,7 @@ const Home = () => {
                 envMapIntensity={1}
               />
             </Headphone>
-
+            <Animation />
             <ambientLight intensity={0.5} />
             <directionalLight position={[1, 1, 1]} intensity={1} castShadow />
             <directionalLight position={[-1, -1, -1]} intensity={0.5} color="#ffccaa" />
@@ -80,7 +91,7 @@ const Home = () => {
       </div>
 
       <div className="mt-1 flex flex-col lg:flex-row w-full md:items-center md:justify-between text-center md:text-left">
-        <div className="max-w-lg  ">
+        <div className="max-w-lg ">
           <p className="md:text-xl text-base font-serif font-semibold text-gray-400 bg">
             Listen to the most podcasts on just one platform - <b>PODCASTER</b>
           </p>
