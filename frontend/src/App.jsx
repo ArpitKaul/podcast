@@ -14,6 +14,7 @@ import Yourpodcast from './Pages/YourPodcast';
 import Addpodcast from './Pages/Addpodcast';
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import AllPodcasts from './Pages/AllPodcasts';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -42,6 +43,7 @@ const App = () => {
           <Route path="/profile" element={<Profile />} />
           <Route path="/add-podcasts" element={<Addpodcast />} />
           <Route path="/your-podcasts" element={<Yourpodcast/>}/>
+          <Route path="/all-podcasts" element={<AllPodcasts/>}/>
         </Route>
 
         <Route element={<Authlayout />}>
